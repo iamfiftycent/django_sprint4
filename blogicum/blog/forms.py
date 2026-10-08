@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post, Comment
 from django.contrib.auth import get_user_model
 
 
@@ -18,4 +18,13 @@ class UserForm(forms.ModelForm):
         fields = ['username', 'email', 'password']
         widgets = {
             'password': forms.PasswordInput()
+        }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
+        widgets = {
+            'text': forms.Textarea(attrs={'rows': 3})
         }

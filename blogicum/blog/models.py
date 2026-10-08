@@ -126,3 +126,34 @@ class Location(models.Model):
     class Meta:
         verbose_name = 'местоположение'
         verbose_name_plural = 'Местоположения'
+
+
+class Comment(models.Model):
+    """Комментарий к посту."""
+
+    text = models.TextField(
+        'Текст комментария',
+        blank=False)
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name='comments'
+    )
+    created_at = models.DateTimeField(
+        'Дата создания',
+        auto_now_add=True
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+    is_published = models.BooleanField(
+        'Опубликован',
+        default=True,
+        blank=False,
+        verbose_name='Опубликован',
+        help_text='Снимите галочку, чтобы скрыть комментарий.'
+    )
+
+    class Meta:
+        ordering = ('created_at',)
