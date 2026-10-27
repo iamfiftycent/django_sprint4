@@ -14,6 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+TEMPLATES_DIR = BASE_DIR / 'templates'
 
 
 # Quick-start development settings - unsuitable for production
@@ -67,8 +68,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'templates',
-            BASE_DIR,
+            TEMPLATES_DIR,
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -154,3 +154,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_FAILURE_VIEW = 'pages.views.csrf_failure'
 
 MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'blog:index'
+
+# Настройки электронной почты
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'

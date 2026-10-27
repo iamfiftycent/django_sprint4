@@ -1,6 +1,5 @@
-# Create your models here.
-from django.db import models
 from django.contrib.auth import get_user_model
+from django.db import models
 from django.utils import timezone
 
 
@@ -20,8 +19,7 @@ class Post(models.Model):
         verbose_name='Текст'
     )
     pub_date = models.DateTimeField(
-        auto_now_add=True,
-        blank=True,
+        default=timezone.now,
         verbose_name='Дата и время публикации',
         help_text='Если установить дату и время в будущем '
                   '— можно делать отложенные публикации.',
@@ -62,6 +60,7 @@ class Post(models.Model):
         verbose_name='Изображение',
         upload_to='posts_images',
     )
+
     class Meta:
         verbose_name = 'публикация'
         verbose_name_plural = 'Публикации'
