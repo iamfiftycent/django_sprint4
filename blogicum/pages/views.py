@@ -1,23 +1,36 @@
-from django.shortcuts import render
-
-# Create your views here.
+from django.views.generic import TemplateView
 
 
-def about(request):
-    return render(request, 'pages/about.html')
+class AboutView(TemplateView):
+    template_name = 'pages/about.html'
 
 
-def rules(request):
-    return render(request, 'pages/rules.html')
+class RulesView(TemplateView):
+    template_name = 'pages/rules.html'
 
 
-def page_not_found(request, exception):
-    return render(request, 'pages/404.html', status=404)
+class PageNotFoundView(TemplateView):
+    template_name = 'pages/404.html'
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        response.status_code = 404
+        return response
 
 
-def server_error(request):
-    return render(request, 'pages/500.html', status=500)
+class ServerErrorView(TemplateView):
+    template_name = 'pages/500.html'
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        response.status_code = 500
+        return response
 
 
-def csrf_failure(request, reason=None):
-    return render(request, 'pages/403csrf.html', status=403)
+class CsrfFailureView(TemplateView):
+    template_name = 'pages/403csrf.html'
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        response.status_code = 403
+        return response

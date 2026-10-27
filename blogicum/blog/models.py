@@ -151,7 +151,6 @@ class Comment(models.Model):
         'Опубликован',
         default=True,
         blank=False,
-        verbose_name='Опубликован',
         help_text='Снимите галочку, чтобы скрыть комментарий.'
     )
 
